@@ -1,0 +1,70 @@
+body, html {
+    margin: 0;
+    padding: 0;
+
+}
+
+body {
+    color: black;
+    display: table;
+    font-family: Arial, Georgia, serif;
+    font-size: 18px;
+    text-align: left;
+    /*background-image: url("../img/template/certificate_course_1.png");*/
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-left: 150px;
+    width: 100%;
+    height: 100%;
+}
+
+.container {
+    /*border: 20px solid #CF6E00;*/
+    width: 750px;
+    height: 563px;
+    /*display: table-cell;*/
+    vertical-align: middle;
+}
+
+.logo {
+    position: absolute;
+    top: 60px;
+    left: 60px;
+
+}
+
+.marquee {
+    color: midnightblue;
+    font-size: 100px;
+    margin: 20px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+.assignment {
+    margin: 20px;
+}
+
+.person {
+    color: midnightblue;
+    font-size: 32px;
+    font-style: italic;
+    margin: 20px;
+    width: 400px;
+    padding-bottom: 20px;
+}
+
+.reason {
+    margin: 20px;
+    padding-bottom: 50px;
+}
+
+.professor {
+    display: block;
+    justify-content: center;
+    margin: 20px;
+    margin-top: 50px;
+}
+.professor-image{
+    margin-bottom: 0;
+}

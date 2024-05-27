@@ -1,0 +1,54 @@
+@extends('layouts.admin')
+
+@section('content')
+    <div class="container-fluid px-4">
+        <div class="d-flex justify-content-between align-items-center">
+            <h3 class="mt-3 ">Professor</h3>
+            <ol class="breadcrumb mb-3 mt-3">
+                <li class="breadcrumb-item mb-3 mt-3"><a href="{{route('permission.index')}}"
+                                                         class="text-decoration-none">Permissões</a></li>
+                <li class="breadcrumb-item mb-3 mt-3 active">Permissão</li>
+            </ol>
+        </div>
+
+        <div class="card mb-4 shadow">
+            <div class="card-header d-flex justify-content-between">
+                <div class="d-flex justify-content-start">
+                    <span>Visualizar</span>
+                </div>
+                <div class="d-flex">
+                    @can('edit-permission')
+                        <a href="{{ route('permission.edit', ['permission' => $permission->id]) }}"
+                           class="btn btn-primary btn-sm me-2">Editar</a>
+                    @endcan
+
+                    @can('destroy-permission')
+                        <form id="formDelete{{ $permission->id }}" action="{{ route('permission.destroy', ['permission' => $permission->id]) }}"
+                              method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm btnDelete" data-delete-id="{{ $permission->id }}">Excluir
+                            </button>
+                        </form>
+                    @endcan
+
+                </div>
+            </div>
+            <div class="card-body">
+                <dl class="row">
+                    <dt class="col-sm-3">Nome:</dt>
+                    <dd class="col-sm-9">{{ $permission->title }}</dd>
+
+                    <dt class="col-sm-3">Rota:</dt>
+                    <dd class="col-sm-9">{{ $permission->name }}</dd>
+
+                    <dt class="col-sm-3">Cadastrado:</dt>
+                    <dd class="col-sm-9">{{ $permission->created_at->format('d/m/Y H:i:s') }}</dd>
+
+                    <dt class="col-sm-3">Editado:</dt>
+                    <dd class="col-sm-9">{{ $permission->updated_at->format('d/m/Y H:i:s') }}</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+@endsection

@@ -15,11 +15,13 @@
             </ol>
         </div>
         @can('create-module')
-            <div class="d-flex justify-content-end mb-3">
-                <a href="{{ route('module.create', ['course' => $course->id]) }}"
-                   class="btn btn-primary btn-sm border-0 me-2" title="Cadastrar">Cadastrar
-                </a>
-            </div>
+            @if($datas->count() > 0)
+                <div class="d-flex justify-content-end mb-3">
+                    <a href="{{ route('module.create', ['course' => $course->id]) }}"
+                       class="btn btn-primary btn-sm border-0 me-2" title="Cadastrar">Cadastrar
+                    </a>
+                </div>
+            @endif
         @endcan
         <x-alert/>
 

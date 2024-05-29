@@ -23,9 +23,6 @@ class CertificateController extends Controller
         // Número do registro do certificado do aluno
         $certificateUUID = Certificate::where('student_id', $student->id)->where('aux_course', $course->id)->value('certificate');
 
-        if (!auth()->user()->hasRole('Aluno')) {
-            return redirect()->back()->with('error', 'Somente alunos podem emitir certificado!');
-        }
 
         if ($certificate > 0) {
 

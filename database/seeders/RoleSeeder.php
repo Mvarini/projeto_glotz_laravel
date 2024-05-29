@@ -120,6 +120,7 @@ class RoleSeeder extends Seeder
             'index-module',
             'view-classe',
             'file-classe',
+            'generate-pdf-user'
         ]);
     }
 

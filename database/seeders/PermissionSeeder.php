@@ -64,6 +64,7 @@ class PermissionSeeder extends Seeder
             ['title' => 'Listar permissões do papel', 'name' => 'index-role-permission'],
             ['title' => 'Editar permissões do papel', 'name' => 'update-role-permission'],
 
+            ['title' => 'Emitir certificado', 'name' => 'generate-pdf-user'],
 
         ];
 

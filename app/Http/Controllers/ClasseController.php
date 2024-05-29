@@ -6,17 +6,13 @@ use App\Http\Requests\ClasseRequest;
 use App\Models\Certificate;
 use App\Models\Classe;
 use App\Models\ClasseWatched;
-use App\Models\Course;
 use App\Models\Module;
 use App\Models\Student;
-use App\Models\User;
-use Faker\Core\File;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
-
+use Illuminate\Support\Str;
 
 class ClasseController extends Controller
 {
@@ -83,7 +79,7 @@ class ClasseController extends Controller
                 'name' => $request->name,
                 'video' => $video,
                 'order_classe' => $lastOrderClasse != null ? $lastOrderClasse->order_classe + 1 : 1,
-                'pdf' => $request->hasFile('pdf') ? $pdf : $request->pdf
+                'pdf' => $request->hasFile('pdf') ? $pdf : $request->pdf,
             ]);
 
             // Processo concluído
@@ -151,7 +147,7 @@ class ClasseController extends Controller
             $classe->update([
                 'name' => $request->name,
                 'video' => $request->hasFile('video') ? $video : $classe->video,
-                'pdf' => $request->hasFile('pdf') ? $pdf : $classe->pdf
+                'pdf' => $request->hasFile('pdf') ? $pdf : $classe->pdf,
             ]);
 
             // Processo concluído
@@ -218,7 +214,10 @@ class ClasseController extends Controller
         $dataFirst = Classe::with('module')->where('module_id', $classe->module_id)->first();
 
         // Listar os aulas específicas do módulo, ordenar e paginação
-        $listClasses = Classe::with('module')->where('module_id', $classe->module_id)->orderBy('created_at', 'ASC')->get();
+        $listClasses = Classe::with('module')->where('module_id', $classe->module_id)->orderBy(
+            'created_at',
+            'ASC'
+        )->get();
 
         // Compara se o id do usuário logado é igual ao aluno
         $student = Student::with('user')->where('user_id', Auth::id())->first();
@@ -234,6 +233,9 @@ class ClasseController extends Controller
         // Recuperar somente os ids concatenados da tablea (classes_watche)
         $listClassesWatched = ClasseWatched::selectRaw("id, CONCAT(class_id,'',student_id) as n")->pluck('n', 'id');
 
+        // Concatenar as colunas aluno e aux_course da tabela certificates
+        $certificateConcat = Certificate::selectRaw("id, CONCAT(student_id,'',aux_course) as n")->pluck('n', 'id');
+
         // Se o papael do usuário logado é aluno
         if (Auth::user()->hasrole('Aluno')) {
             $query = DB::select(
@@ -244,7 +246,6 @@ class ClasseController extends Controller
                 ['student_id' => $student->id, 'curso_id' => $classe->module->course_id]
             );
 
-
             $queryCount = DB::select(
                 'select count(1) as qtde from classes cl
                     join modules m on cl.module_id  = m.id  and m.course_id  = :curso_id',
@@ -252,15 +253,29 @@ class ClasseController extends Controller
             );
 
             if ($query != null && $queryCount != null && $query[0]->qtde == $queryCount[0]->qtde) {
-                Certificate::firstOrCreate([
-                    'student_id' => $student->id,
-                    'aux_course' => $classe->module->course_id
-                ]);
+                // Caso não exista o aluno e curso na tabela certificates, cadastra
+                if (! $certificateConcat->contains($student->id.$classe->module->course_id)) {
+                    Certificate::Create([
+                        'student_id' => $student->id,
+                        'aux_course' => $classe->module->course_id,
+                        'certificate' => Str::uuid(),
+                    ]);
+                }
             }
         }
 
         // Carregar a view
-        return view('classes.view', ['classe' => $classe, 'listClasses' => $listClasses, 'dataFirst' => $dataFirst, 'menu' => 'courses', 'listClassesWatched' => $listClassesWatched, 'student' => $student]);
+        return view(
+            'classes.view',
+            [
+                'classe' => $classe,
+                'listClasses' => $listClasses,
+                'dataFirst' => $dataFirst,
+                'menu' => 'courses',
+                'listClassesWatched' => $listClassesWatched,
+                'student' => $student,
+            ]
+        );
     }
 
     // Fazer o download do PDF da aula

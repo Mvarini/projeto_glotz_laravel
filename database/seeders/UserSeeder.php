@@ -27,10 +27,10 @@ class UserSeeder extends Seeder
         }
 
         // Caso não exista, então adicione no banco
-        if (!User::where('email', 'luana@2tx.com.br')->first()){
+        if (!User::where('email', 'erlon@2tx.com.br')->first()){
             $admin = User::create([
-                'name' => 'Luana',
-                'email' => 'luana@2tx.com.br',
+                'name' => 'Erlon Martins Tostes',
+                'email' => 'erlon@2tx.com.br',
                 'password' => Hash::make('123456a', ['rounds' => 10])
             ]);
 
@@ -38,28 +38,28 @@ class UserSeeder extends Seeder
             $admin->assignRole('Admin');
         }
 
-        // Caso não exista, então adicione no banco
-        if (!User::where('email', 'jean@2tx.com.br')->first()){
-            $teacher = User::create([
-                'name' => 'Jean',
-                'email' => 'jean@2tx.com.br',
-                'password' => Hash::make('123456a', ['rounds' => 10])
-            ]);
-
-            // Atribuir o papel ao usuário
-            $teacher->assignRole('Aluno');
-        }
-
-        // Caso não exista, então adicione no banco
-        if (!User::where('email', 'bruno@2tx.com.br')->first()){
-            $student = User::create([
-                'name' => 'Bruno',
-                'email' => 'bruno@2tx.com.br',
-                'password' => Hash::make('123456a', ['rounds' => 10])
-            ]);
-
-            // Atribuir o papel ao usuário
-            $student->assignRole('Aluno');
-        }
+//        // Caso não exista, então adicione no banco
+//        if (!User::where('email', 'jean@2tx.com.br')->first()){
+//            $teacher = User::create([
+//                'name' => 'Jean',
+//                'email' => 'jean@2tx.com.br',
+//                'password' => Hash::make('123456a', ['rounds' => 10])
+//            ]);
+//
+//            // Atribuir o papel ao usuário
+//            $teacher->assignRole('Aluno');
+//        }
+//
+//        // Caso não exista, então adicione no banco
+//        if (!User::where('email', 'bruno@2tx.com.br')->first()){
+//            $student = User::create([
+//                'name' => 'Bruno',
+//                'email' => 'bruno@2tx.com.br',
+//                'password' => Hash::make('123456a', ['rounds' => 10])
+//            ]);
+//
+//            // Atribuir o papel ao usuário
+//            $student->assignRole('Aluno');
+//        }
     }
 }

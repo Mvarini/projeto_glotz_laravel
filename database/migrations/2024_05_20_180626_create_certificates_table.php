@@ -3,6 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
+
 
 return new class extends Migration
 {
@@ -15,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('student_id')->constrained('students');
             $table->integer('aux_course');
-            $table->uuid('certificate')->default(\Illuminate\Support\Facades\DB::raw('UUID()'));
+            $table->uuid('certificate')->default(DB::raw('UUID()'));
             $table->timestamps();
         });
     }

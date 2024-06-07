@@ -35,8 +35,7 @@
                         <select name="teacher_id" class="form-select">
                             <option value="">Selecione</option>
                             @foreach($teachers as $teacher)
-                                <option
-                                    {{ $teacher->id == $course->teacher_id ? "selected" : "" }} value="{{ $teacher->id }}">{{ $teacher->first_name }} {{ $teacher->last_name }}</option>
+                                <option {{ $teacher->id == $course->teacher_id ? "selected" : "" }} value="{{ $teacher->id }}">{{ $teacher->first_name }} {{ $teacher->last_name }}</option>
                             @endforeach
                         </select>
                     </div>

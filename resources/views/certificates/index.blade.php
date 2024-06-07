@@ -146,7 +146,7 @@
                     $imgData = base64_encode(file_get_contents($imageFile));
                     $base64_image = 'data:image/jpeg;base64,' . $imgData . $course->teacher->signture;
 
-                    echo '<img src="' . $base64_image .'" alt="" width="200" height="150"/>';
+                    echo '<img src="' . $base64_image .'" alt="" width="200" height="100"/>';
                 }
 
             @endphp

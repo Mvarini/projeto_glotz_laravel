@@ -41,7 +41,7 @@
                     </div>
 
                     <div class="col-md-5">
-                        <label for="signature" class="form-label">Assinatura</label>
+                        <label for="signature" class="form-label">Assinatura (200x150)</label>
                         <input type="file" class="form-control" name="signature" id="signature"><br>
                     </div>
 

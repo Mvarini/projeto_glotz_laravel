@@ -26,11 +26,10 @@
 
                     <div class="col-md-6">
                         <label for="teacher_id" class="form-label">Professor</label>
-                        <select name="teacher_id" class="form-select">
+                        <select name="teacher_id" class="form-select" >
                             <option value="">Selecione</option>
                             @foreach($teachers as $teacher)
-                                <option
-                                    value="{{ $teacher->id }}">{{ $teacher->first_name }} {{ $teacher->last_name }}</option>
+                                <option {{ old('teacher_id') == $teacher->id ? 'selected' : '' }} value="{{ $teacher->id }}">{{ $teacher->first_name }} {{ $teacher->last_name }}</option>
                             @endforeach
                         </select>
                     </div>

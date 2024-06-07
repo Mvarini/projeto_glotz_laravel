@@ -31,7 +31,7 @@
                         <select name="user_id" class="form-select">
                             <option value="">Selecione</option>
                             @foreach($users as $user)
-                                <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                <option {{ old('user_id') == $user->id ? 'selected' : '' }} value="{{ $user->id }}">{{ $user->name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -41,7 +41,7 @@
                         <select name="course_id" class="form-select">
                             <option value="">Selecione</option>
                             @foreach($courses as $course)
-                                <option value="{{ $course->id }}">{{ $course->name }}</option>
+                                <option {{ old('course_id') == $course->id ? 'selected' : '' }} value="{{ $course->id }}">{{ $course->name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -49,6 +49,5 @@
                     <div class="d-flex justify-content-end">
                         <button type="submit" class="btn btn-primary">Cadastrar</button>
                     </div>
-
                 </form>
 @endsection

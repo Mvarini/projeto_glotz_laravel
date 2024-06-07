@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('student_id')->constrained('students');
             $table->integer('aux_course');
-            $table->uuid('certificate')->default(DB::raw('UUID()'));
+            $table->char('certificate', 36);
             $table->timestamps();
         });
     }

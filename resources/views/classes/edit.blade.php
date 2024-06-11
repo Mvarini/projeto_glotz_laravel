@@ -49,12 +49,12 @@
                     </div>
 
                     <div class="col-md-6">
-                        <label for="video" class="form-label">Video</label>
+                        <label for="video" class="form-label">Video (40mb)</label>
                         <input type="file" name="video" id="video" class="form-control" placeholder="video"/>
                     </div>
 
                     <div class="col-md-6">
-                        <label for="pdf" class="form-label">PDF</label><br>
+                        <label for="pdf" class="form-label">PDF (7mb)</label><br>
                         <input type="file" name="pdf" id="pdf" class="form-control" placeholder="pdf"/>
                     </div>
 

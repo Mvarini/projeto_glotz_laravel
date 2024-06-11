@@ -37,21 +37,21 @@
                     </div>
 
                     <div class="col-md-6">
-                        <label for="video" class="form-label">Video</label>
+                        <label for="video" class="form-label">Video (40mb)</label>
                         <input type="file" name="video" id="video" class="form-control" placeholder="video da aula"/>
-                    </div>
+
+                        </div>
 
                     <div class="col-md-6">
-                        <label for="pdf" class="form-label">PDF</label>
+                        <label for="pdf" class="form-label">PDF (7mb)</label>
                         <input type="file" name="pdf" id="pdf" class="form-control" placeholder="pdf da aula"/>
                     </div>
 
                     <div class="d-flex justify-content-end">
-                        <button type="submit" class="btn btn-primary">Cadastrar</button>
+                        <button type="submit" value="submit" class="btn btn-primary">Cadastrar</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-
 @endsection

@@ -26,14 +26,14 @@ class ClasseRequest extends FormRequest
             return [
                 'module_id' => 'required_if:module_id,!=,null',
                 'name' => 'required|max:255',
-                'video' => 'required|mimes:mp4,mov|max:1024000', // até 1GB
+                'video' => 'required|mimes:mp4,mov|max:40000', // até 40mb
                 'pdf' => 'mimes:pdf|max:7096', // unidade de medida kilobytes
             ];
         }else{
             return [
                 'module_id' => 'required_if:module_id,!=,null',
                 'name' => 'required|max:255',
-                'video' => 'nullable|mimes:mp4,mov|max:1024000', // até 1GB
+                'video' => 'nullable|mimes:mp4,mov|max:40000', // até 40mb
                 'pdf' => 'mimes:pdf|max:7096', // unidade de medida kilobytes
             ];
         }
@@ -49,7 +49,7 @@ class ClasseRequest extends FormRequest
             'video' => [
                 'required' => 'O campo vídeo é obrigatório',
                 'mimes' => 'O campo vídeo aceita somente as extensões MP4 e MOV',
-                'max' => 'O tamanho máximo do vídeo é de 1GB',
+                'max' => 'O tamanho máximo do vídeo é de 40 mb',
             ],
             'pdf' => [
                 'mimes' => 'O campo pdf aceita somente arquivos de tipo PDF',

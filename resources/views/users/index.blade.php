@@ -1,13 +1,23 @@
 @extends('layouts.admin')
 
 @section('content')
-
     <div class="container-fluid px-4">
-        <div class="space-between-elements d-flex justify-content-between align-items-center">
+        <div class="d-flex justify-content-between align-items-center">
             <h2 class="mt-3">Usuários</h2>
             <ol class="breadcrumb mb-3 mt-3">
-                <li class="breadcrumb-item active">Usuários</li>
+                <li class="breadcrumb-item mb-3 mt-3 active">Usuários</li>
             </ol>
+        </div>
+
+        <div class="row mb-3">
+            <form action="{{ route('user.index') }}" METHOD="GET">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="pesquisar" value="{{ $pesquisar }}"
+                           placeholder="Pesquisar usuário por nome ou e-mail">
+                    <button type="submit" class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    <a href="{{ route('user.index') }}" class="input-group-text"><i class="fa-solid fa-eraser"></i></a>
+                </div>
+            </form>
         </div>
 
         <div class="card borderAround shadow mb-4">
@@ -21,6 +31,7 @@
                     @endcan
                 </div>
             </div>
+
             <div class="card-body">
 
                 <x-alert/>
@@ -58,10 +69,12 @@
                                 @endcan
 
                                 @can('destroy-user')
-                                    <form id="formDelete{{ $user->id }}" action="{{ route('user.destroy', ['user' => $user->id]) }}" method="POST">
+                                    <form id="formDelete{{ $user->id }}"
+                                          action="{{ route('user.destroy', ['user' => $user->id]) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-outline-danger btn-sm border-0 btnDelete" data-delete-id="{{ $user->id }}">
+                                        <button type="submit" class="btn btn-outline-danger btn-sm border-0 btnDelete"
+                                                data-delete-id="{{ $user->id }}">
                                             <i
                                                 class="fa-solid fa-trash-can"></i></button>
                                     </form>

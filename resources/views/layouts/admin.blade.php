@@ -15,12 +15,6 @@
     {{-- SweetAlert2 --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <style>
-        .progress { position:relative; width:100%; }
-        .bar { background-color: #2dab27; width:0%; height:20px; }
-        .percent { position:absolute; display:inline-block; left:50%; color: #040608;}
-    </style>
-
     <title>Glotz Educação Digital</title>
 </head>
 
@@ -141,6 +135,10 @@
 <script src="{{ asset('js/jquery.mask.js') }}"></script>
 <script src="{{ asset('js/mask.js') }}"></script>
 <script src="{{ asset('js/sweet.alert.delete.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>
+
+
+
 
 </body>
 </html>

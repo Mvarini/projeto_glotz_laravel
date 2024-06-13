@@ -7,7 +7,6 @@
                 <li class="breadcrumb-item mb-3 mt-3 active">Alunos</li>
             </ol>
         </div>
-
         <div class="card mb-4 shadow">
             <div class="card-header d-flex justify-content-between">
                 <div class="d-flex justify-content-start">

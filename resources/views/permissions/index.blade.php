@@ -9,6 +9,17 @@
             </ol>
         </div>
 
+        <div class="row mb-3">
+            <form action="{{ route('permission.index') }}" METHOD="GET">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="search" value="{{ $search }}"
+                           placeholder="Pesquisar permissão por título ou nome">
+                    <button type="submit" class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    <a href="{{ route('permission.index') }}" class="input-group-text"><i class="fa-solid fa-eraser"></i></a>
+                </div>
+            </form>
+        </div>
+
         <div class="card mb-4 shadow">
             <div class="card-header d-flex justify-content-between">
                 <div class="d-flex justify-content-start">

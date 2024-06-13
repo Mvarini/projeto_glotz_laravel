@@ -24,7 +24,7 @@
                 {{--            As informações estão em view/components--}}
                 <x-alert/>
 
-                <form class="row g-3" action="{{ route('classe.store') }}" method="POST" enctype="multipart/form-data">
+                <form class="row g-3" id="frm" action="{{ route('classe.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('POST')
 
@@ -40,8 +40,7 @@
                         <label for="video" class="form-label">Video (40mb)</label>
                         <input type="file" name="video" id="video" class="form-control" placeholder="video da aula"/>
 
-                        </div>
-
+                    </div>
                     <div class="col-md-6">
                         <label for="pdf" class="form-label">PDF (7mb)</label>
                         <input type="file" name="pdf" id="pdf" class="form-control" placeholder="pdf da aula"/>
@@ -54,4 +53,5 @@
             </div>
         </div>
     </div>
+
 @endsection

@@ -11,13 +11,19 @@ use Spatie\Permission\Models\Permission;
 
 class PermissionController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        // Recuperar os dados do banco de dados
-        $permissions = Permission::orderBy('created_at')->paginate(20);
+        $permissionSearch = $request->input('search');
+        $permissions = Permission::where('title', 'like', '%' . $permissionSearch . '%')
+            ->orWhere('name', 'like', '%' . $permissionSearch . '%')
+            ->paginate(10)
+            ->withQueryString();
+
+//        // Recuperar os dados do banco de dados
+//        $permissions = Permission::orderBy('created_at')->paginate(20);
 
         // Carregar a view
-        return view('permissions.index', ['menu' => 'permissions', 'permissions' => $permissions]);
+        return view('permissions.index', ['menu' => 'permissions', 'permissions' => $permissions, 'search' => $permissionSearch]);
     }
 
     public function show(Permission $permission)

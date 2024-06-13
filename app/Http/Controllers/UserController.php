@@ -14,12 +14,23 @@ use Spatie\Permission\Models\Role;
 class UserController extends Controller
 {
     // Lista todos os usuários
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::orderByDesc('created_at')->paginate(9);
+        // Pesquisar por usuário ou email
+        $userSearch = $request->input('pesquisar');
+        $users = User::where('name', 'like', '%' . $userSearch . '%')
+            ->orWhere('email', 'like', '%' . $userSearch . '%')
+            ->orderByDesc('created_at')
+            ->paginate(10)
+            ->withQueryString();
 
-        // Carrega a view
-        return view('users.index', ['menu' => 'users', 'users' => $users]);
+
+//        // Listar todos os usuários por página em ordem decrescente
+//        $users = User::orderByDesc('created_at')->paginate(9);
+
+            // Carrega a view
+            return view('users.index', ['menu' => 'users', 'users' => $users, 'pesquisar' => $userSearch]);
+
     }
 
     // Visualizar o usuário
@@ -49,7 +60,6 @@ class UserController extends Controller
         DB::beginTransaction();
 
         try {
-
             $user = User::create([
                 'name' => $request->name,
                 'email' => Str::lower($request->email),
@@ -67,8 +77,7 @@ class UserController extends Controller
 
             // Redirecionar o usuário, enviar a mensagem de sucesso
             return redirect()->route('user.index')->with('success', 'Usuário cadastrado com sucesso!');
-
-        }catch (\Exception $ex){
+        } catch (\Exception $ex) {
             // Salvar o log
             Log::error('Usuário não cadastrado', ['error' => $ex->getMessage(), 'action_user_id' => Auth::id()]);
 
@@ -103,7 +112,6 @@ class UserController extends Controller
         DB::beginTransaction();
 
         try {
-
             $user->update([
                 'name' => $request->name,
                 'email' => $request->email,
@@ -120,8 +128,7 @@ class UserController extends Controller
 
             // Redireciona o usuário, envia a mensagem de sucesso
             return redirect()->route('user.index')->with('success', 'Usuário editado com sucesso!');
-
-        }catch (\Exception $ex){
+        } catch (\Exception $ex) {
             // Salvar o log
             Log::error('Usuário não editado', ['error' => $ex->getMessage(), 'action_user_id' => Auth::id()]);
 
@@ -148,8 +155,7 @@ class UserController extends Controller
 
             // Redireciona o usuário, envia mensagem de sucesso
             return redirect()->route('user.index')->with('success', 'Usuário excluído com sucesso!');
-
-        }catch (\Exception $ex){
+        } catch (\Exception $ex) {
             // Salvar log
             Log::error('Usuário não excluído', ['id' => $user->id, 'action_user_id' => Auth::id()]);
 
@@ -168,36 +174,34 @@ class UserController extends Controller
     // Editar no banco de dados a senha do usuário
     public function updatePassword(Request $request, User $user)
     {
-
         // Validar o formulário
         $request->validate([
             'password' => 'required|min:6|confirmed' // confirmed: para confirmar a senha com um campo
         ], [
             'password.required' => 'O campo senha é obrigatório',
             'password.min' => 'A senha de ter no mínimo :min caracteres',
-            'password.confirmed' => 'O campo Confirmar nova senha não coincide' // outro campo deve ter o name: password_confirmation na view
+            'password.confirmed' => 'O campo Confirmar nova senha não coincide'
+            // outro campo deve ter o name: password_confirmation na view
         ]);
 
         // Marca o ponto inicial da transação
         DB::beginTransaction();
 
         try {
-                // Editar a senha no banco de dados
-                $user->update([
-                    'password' => $request->password
-                ]);
+            // Editar a senha no banco de dados
+            $user->update([
+                'password' => $request->password
+            ]);
 
-                // Salvar o log
-                Log::info('Senha editada', ['id' => $user->id, 'action_user_id' => Auth::id()]);
+            // Salvar o log
+            Log::info('Senha editada', ['id' => $user->id, 'action_user_id' => Auth::id()]);
 
-                // Operação concluída
-                DB::commit();
+            // Operação concluída
+            DB::commit();
 
-                // Redireciona o usuário, envia a mensagem de sucesso
-                return redirect()->route('user.index')->with('success', 'Senha do usuário editada com sucesso!');
-
-
-        }catch (\Exception $ex){
+            // Redireciona o usuário, envia a mensagem de sucesso
+            return redirect()->route('user.index')->with('success', 'Senha do usuário editada com sucesso!');
+        } catch (\Exception $ex) {
             // Salvar o log
             Log::error('Senha não editada', ['error' => $ex->getMessage(), 'action_user_id' => Auth::id()]);
 

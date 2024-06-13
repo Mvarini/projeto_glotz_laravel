@@ -15,10 +15,13 @@ use Illuminate\Support\Facades\Log;
 
 class StudentController extends Controller
 {
-    public function index(Course $course, User $user)
+    public function index(Course $course, User $user, Request $request)
     {
+
+        // Listar todos os aluno com cursos, ordenado e paginação
         $students = Student::orderBy('user_id', 'asc')->paginate(10);
 
+        // Carregar a view
         return view('students.index', ['user' => $user, 'course' => $course, 'students' => $students, 'menu' => 'students']);
     }
 

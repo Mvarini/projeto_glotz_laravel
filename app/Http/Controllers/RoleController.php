@@ -10,13 +10,19 @@ use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        // Recuperar os registros do banco de dados
-        $roles = Role::orderBy('name', 'asc')->paginate(10);
+        $roleSearch = $request->input('pesquisar');
+        $roles = Role::where('name', 'like', '%' . $roleSearch . '%')
+            ->orderBy('name', 'asc')
+            ->paginate(10)
+            ->withQueryString();
+
+//        // Recuperar os registros do banco de dados
+//        $roles = Role::orderBy('name', 'asc')->paginate(10);
 
         // Carregar a view
-        return view('roles.index', ['menu' => 'roles', 'roles' => $roles]);
+        return view('roles.index', ['menu' => 'roles', 'roles' => $roles, 'pesquisar' => $roleSearch]);
     }
 
     public function show(Role $role)
@@ -45,9 +51,8 @@ class RoleController extends Controller
         DB::beginTransaction();
 
         try {
-
             // Cadastrar no banco de dados
-            $role =  Role::create([
+            $role = Role::create([
                 'name' => $request->name,
                 'guard_name' => 'web'
             ]);
@@ -60,8 +65,7 @@ class RoleController extends Controller
 
             // Redirecionar o usuário e enviar a mensagem
             return redirect()->route('role.index')->with('success', 'Papel cadastrado com sucesso');
-
-        }catch (\Exception $ex){
+        } catch (\Exception $ex) {
             // Salvar o log
             Log::error('Papel não cadastrado', ['error' => $ex->getMessage(), 'action_user_id' => Auth::id()]);
 
@@ -71,7 +75,6 @@ class RoleController extends Controller
             // Redirecionar o usuário e enviar a mensagem
             return redirect()->route('role.index')->with('error', 'Erro ao cadastrar papel');
         }
-
     }
 
     public function edit(Role $role)
@@ -106,8 +109,7 @@ class RoleController extends Controller
 
             // Redirecionar o usuário e enviar a mensagem
             return redirect()->route('role.index')->with('success', 'Papel atualizado com sucesso');
-
-        }catch (\Exception $ex){
+        } catch (\Exception $ex) {
             // Salvar o log
             Log::error('Papel não atualizado', ['error' => $ex->getMessage(), 'action_user_id' => Auth::id()]);
 
@@ -130,13 +132,12 @@ class RoleController extends Controller
 
             // Redirecionar o usuário e enviar a mensagem
             return redirect()->route('role.index')->with('success', 'Papel excluído com sucesso');
-        }catch (\Exception $ex){
+        } catch (\Exception $ex) {
             // Salvar o log
             Log::error('Papel não excluído', ['id' => $role->id, 'action_user_id' => Auth::id()]);
 
             // Redirecionar o usuário e enviar a mensagem
             return redirect()->route('role.index')->with('error', 'Erro ao excluir papel');
         }
-
     }
 }

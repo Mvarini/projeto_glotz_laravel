@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TeacherRequest;
 use App\Models\Teacher;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -14,12 +13,20 @@ use Illuminate\Support\Facades\Log;
 class TeacherController extends Controller
 {
     // Listar todos os professores
-    public function index()
+    public function index(Request $request)
     {
-        $teachers = Teacher::orderByDesc('created_at')->paginate(10);
+
+        $teacherSearch = $request->input('pesquisar');
+        $teachers = Teacher::where('first_name', 'like', '%' . $teacherSearch . '%')
+            ->orWhere('last_name', 'like', '%' . $teacherSearch . '%')
+            ->paginate(10)
+            ->withQueryString();
+
+//        // Listar todos os professores, ordenar e paginação
+//        $teachers = Teacher::orderByDesc('created_at')->paginate(10);
 
         // Carrega a view
-        return view('teachers.index', ['teachers' => $teachers, 'menu' => 'teachers']);
+        return view('teachers.index', ['teachers' => $teachers, 'menu' => 'teachers', 'pesquisar' => $teacherSearch]);
     }
 
     // Detalhes do professor

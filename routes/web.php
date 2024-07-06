@@ -10,6 +10,9 @@ Route::post('/login', [\App\Http\Controllers\LoginController::class, 'loginProce
 
 // FORGOT PASSWORD
 Route::get('/forgot-password', [\App\Http\Controllers\ForgotPasswordController::class, 'showForgotPassword'])->name('forgot-password.show');
+Route::post('/forgot-password', [\App\Http\Controllers\ForgotPasswordController::class, 'submitForgotPassword'])->name('forgot-password.submit');
+Route::get('/reset-password/{token}', [\App\Http\Controllers\ForgotPasswordController::class, 'showResetPassword'])->name('password.reset');
+Route::post('/reset-password', [\App\Http\Controllers\ForgotPasswordController::class, 'submitResetPassword'])->name('reset-password.submit');
 
 Route::group(['middleware' => 'auth'], function () {
 // LOGOUT

@@ -15,7 +15,7 @@
                                     <div class="d-grid">
                                         <a class="btn my-4  btn-white" href="javascript:;"> <span
                                                 class="d-flex justify-content-center align-items-center">
-                                                <img class="me-2" src="img/icon/glotzorange.png" width="200"
+                                                <img class="me-2" src="{{asset('img/icon/glotzorange.png')}}" width="200"
                                                      alt="Image Description">
 											</span>
                                         </a>
@@ -28,12 +28,20 @@
                                         <span>Faça login para acessar o Glotz</span>
                                     </div>
 
-{{--                                    <x-alert/>--}}
+                                    {{--                                    <x-alert/>--}}
+                                    @if(session('success'))
+                                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                            {{ session('success') }}
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                    aria-label="Close"></button>
+                                        </div>
+                                    @endif
 
                                     @if(session('error'))
                                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                             {{ session('error') }}
-                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                    aria-label="Close"></button>
                                         </div>
                                     @endif
 
@@ -46,7 +54,8 @@
                                                        placeholder="E-mail" value="{{ old('email') }}">
                                             </div>
                                             <div class="col-12">
-                                                <input type="password" class="form-control" id="password" name="password"
+                                                <input type="password" class="form-control" id="password"
+                                                       name="password"
                                                        placeholder="Senha">
                                             </div>
 
@@ -57,7 +66,8 @@
                                             </div>
 
                                             <div class="col-md-6 mt-5"><a
-                                                    href="{{ route('forgot-password.show') }}" class="text-decoration-none">Esqueceu a senha?</a>
+                                                    href="{{ route('forgot-password.show') }}"
+                                                    class="text-decoration-none">Esqueceu a senha?</a>
                                             </div>
                                         </form>
                                     </div>

@@ -58,16 +58,18 @@
                                                        name="password"
                                                        placeholder="Senha">
                                             </div>
-
                                             <div class="col-12">
                                                 <div class="d-grid">
                                                     <button type="submit" class="btn btn-primary">Entrar</button>
                                                 </div>
                                             </div>
-
-                                            <div class="col-md-6 mt-5"><a
+                                            <div class="col-12 mt-4"><a
                                                     href="{{ route('forgot-password.show') }}"
                                                     class="text-decoration-none">Esqueceu a senha?</a>
+                                            </div>
+                                            <div class="col-12">
+                                                <p>Ainda não tem conta? <a href="{{route('login.create-user')}}" class="text-decoration-none">Inscrever-se!</a>
+                                                </p>
                                             </div>
                                         </form>
                                     </div>

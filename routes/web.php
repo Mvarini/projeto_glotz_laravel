@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Route;
 // LOGIN
 Route::get('/', [\App\Http\Controllers\LoginController::class, 'index'])->name('login.index');
 Route::post('/login', [\App\Http\Controllers\LoginController::class, 'loginProcess'])->name('login.process');
+Route::get('/create-user-login', [\App\Http\Controllers\LoginController::class, 'create'])->name('login.create-user');
+Route::post('/store-user-login', [\App\Http\Controllers\LoginController::class, 'store'])->name('login.store-user');
 
 // FORGOT PASSWORD
 Route::get('/forgot-password', [\App\Http\Controllers\ForgotPasswordController::class, 'showForgotPassword'])->name('forgot-password.show');

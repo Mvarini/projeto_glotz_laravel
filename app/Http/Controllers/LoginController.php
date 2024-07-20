@@ -6,7 +6,11 @@ use App\Http\Requests\LoginRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class LoginController extends Controller
 {
@@ -49,6 +53,62 @@ class LoginController extends Controller
 
         // Redirecionar o usuário
         return redirect()->route('course.index');
+    }
+
+    public function create()
+    {
+        // Carregar a view
+        return view('login.create');
+    }
+
+    public function store(Request $request)
+    {
+        // Validar os dados
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:6|confirmed',
+        ], [
+            'email.required' => 'O campo e-mail é obrigatorio',
+            'email.email' => 'É necessário um e-mail válido',
+            'email.unique' => 'O e-mail já está cadastrado',
+            'password.min' => 'Senha com no mínimo :min caracteres',
+            'password.confirmed' => 'As senhas estão diferentes',
+        ]);
+
+        // Ponto inicial da transação
+        DB::beginTransaction();
+
+        try {
+            // Salvar no bando de dados
+            $user = User::create([
+                'name' => $request->name,
+                'email' => Str::lower($request->email),
+                'password' => $request->password,
+            ]);
+
+            // Cadastrar papael definido para novos usuários
+            $user->assignRole('Aluno');
+
+            // Salvar o log
+            Log::info('Usuário cadastrado', ['id' => $user->id, $user->name, $user->email]);
+
+            // Transação concluída
+            DB::commit();
+
+            // Redirecionar e enviar mensagem
+            return redirect()->route('login.index')->with('success', 'Usuário cadastrado com sucesso');
+
+        }catch (\Exception $ex){
+            // Salvar o log
+            Log::info('Usuário não cadastrado', ['error' => $ex->getMessage(), 'name' => $request->name, 'email' => $request->email]);
+
+            // Operação não concluída
+            DB::rollBack();
+
+            // Redirecionar o usuário e enviar a mensagem
+            return redirect()->back()->withInput()->with('error', 'Usuário não cadastrado');
+        }
     }
 
     // Deslogar o usuário

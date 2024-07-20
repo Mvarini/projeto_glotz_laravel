@@ -70,7 +70,7 @@ class UserController extends Controller
             $user->assignRole($request->roles);
 
             // Salvar olog
-            Log::info('Usuário cadastrdo', ['id' => $user->id, $user, 'action_user_id' => Auth::id()]);
+            Log::info('Usuário cadastrdo', ['id' => $user->id, $user->name, $user->email, 'action_user_id' => Auth::id()]);
 
             // Operação concluída com êxito
             DB::commit();

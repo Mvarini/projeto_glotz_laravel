@@ -26,7 +26,7 @@
     </button>
 
     <!-- Navbar Brand-->
-    <a class="navbar-brand ps-3" href="#">Glotz Educação Digital</a>
+    <a class="navbar-brand ps-3" href="#">Glotz <span class="d-none d-sm-inline">Educação Digital</span></a>
 
     <!-- Navbar Search-->
     <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0"></form>

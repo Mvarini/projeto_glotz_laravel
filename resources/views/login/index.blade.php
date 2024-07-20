@@ -78,6 +78,9 @@
                         </div>
                     </div>
                 </div>
+                <div class="text-center mt-5">
+                    <a href="#" onClick="window.open('https://www.sitelock.com/verify.php?site=marcielvarini.com','SiteLock','width=600,height=600,left=160,top=170');"><img className="img-fluid" alt="SiteLock" title="SiteLock" src="https://shield.sitelock.com/shield/marcielvarini.com" /></a>
+                </div>
                 <!--end row-->
             </div>
         </div>

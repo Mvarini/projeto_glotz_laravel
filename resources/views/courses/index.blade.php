@@ -110,11 +110,9 @@
                                                     <i class="fa-solid fa-medal"></i> Certificado
                                                 </a>
                                             @else
-                                                <a href="#"
-                                                   class="btn btn-primary btn-sm me-2 border-0">
+                                                <a class="btn btn-primary btn-sm me-2 border-0 disabled" role="button" aria-disabled="true">
                                                     <i class="fa-solid fa-medal"></i> Certificado
                                                 </a>
-
                                             @endif
                                         @endcan
                                     </div>

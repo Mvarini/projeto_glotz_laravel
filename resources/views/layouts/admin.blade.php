@@ -136,7 +136,9 @@
 <script src="{{ asset('js/mask.js') }}"></script>
 <script src="{{ asset('js/sweet.alert.delete.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>
-
+<script src="{{ asset('js/chart.js') }}"></script>
+<script src="{{ asset('js/main.js') }}"></script>
+@stack('graficos')
 
 
 

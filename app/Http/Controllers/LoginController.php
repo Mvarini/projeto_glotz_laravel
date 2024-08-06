@@ -52,7 +52,12 @@ class LoginController extends Controller
         $user->syncPermissions($permissons);
 
         // Redirecionar o usuário
-        return redirect()->route('course.index');
+        if($user->hasRole('Aluno')){
+            return redirect()->route('course.index');
+        }else{
+            return redirect()->route('dashboard.index');
+        }
+
     }
 
     public function create()

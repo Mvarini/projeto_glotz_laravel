@@ -12,7 +12,12 @@
         <div>
             <div class="card-header d-flex justify-content-between">
                 <div class="d-flex justify-content-start mb-4">
-                    <span>Meus cursos</span>
+                    @if(Auth()->user()->hasRole('Aluno'))
+                        <span>Meus cursos</span>
+                    @else
+                        <span>Todos os cursos</span>
+                    @endif
+
                 </div>
                 <div>
                     @can('create-course')

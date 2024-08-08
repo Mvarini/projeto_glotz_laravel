@@ -52,7 +52,7 @@ class DashboardController extends Controller
         }
 
         // Formatar para chartjs Gráfico 01
-        $studentLabel = " 'Cdastro de Alunos' ";
+        $studentLabel = " 'Alunos cadastrados' ";
         $studentYear = implode(',', $year);
         $studentTotal = implode(',', $total);
 

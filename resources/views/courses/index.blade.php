@@ -125,13 +125,12 @@
                                 Nenhum curso cadastrado
                             </div>
                         </div>
-
                     @endforelse
                 </div>
             </div>
         </div>
+        <nav aria-label="Page navigation example" class="mt-2">
+            {{ $courses->onEachSide(0)->links() }}
+        </nav>
     </div>
-    <nav aria-label="Page navigation example">
-        {{ $courses->onEachSide(0)->links() }}
-    </nav>
 @endsection

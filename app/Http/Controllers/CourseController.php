@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CourseRequest;
+use App\Models\Classe;
 use App\Models\Course;
+use App\Models\Module;
 use App\Models\Student;
 use App\Models\Teacher;
 
@@ -19,23 +21,30 @@ class CourseController extends Controller
     // Listar todos os cursos
     public function index( Teacher $teacher)
     {
+        // Usuário logado
         $user = Auth::user();
 
+        // Relaciona o usuário logado com o aluno
         $student = Student::where('user_id', $user->id)->first();
 
+        // Carrega os cursos do aluno, caso não seja aluno carrega tudo
         if ($user->hasRole('Aluno')) {
-
-            $courses = DB::table('students')
-                ->join('users', 'users.id', '=', 'students.user_id')
-                ->where('students.user_id', Auth::id())
-                ->join('courses', 'courses.id', '=', 'students.course_id')->paginate(10);
-
-
+            $courses = DB::table('students as s')
+                ->join('users as u', 'u.id', '=', 's.user_id')
+                ->join('courses as c', 'c.id', '=', 's.course_id')
+                ->where('s.user_id', '=',  Auth::id())
+                ->paginate(10);
         }else {
             $courses = Course::orderByDesc('created_at')->paginate(10);
         }
 
-        return view('courses.index', ['courses' => $courses, 'teacher' => $teacher, 'menu' => 'courses', 'student' => $student]);
+        // Carregar a view
+        return view('courses.index', [
+            'courses' => $courses,
+            'teacher' => $teacher,
+            'menu' => 'courses',
+            'student' => $student,
+        ]);
    }
 
     // Visualizar os detalhes do  curso

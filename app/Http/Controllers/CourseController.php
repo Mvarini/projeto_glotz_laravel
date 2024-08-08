@@ -33,9 +33,9 @@ class CourseController extends Controller
                 ->join('users as u', 'u.id', '=', 's.user_id')
                 ->join('courses as c', 'c.id', '=', 's.course_id')
                 ->where('s.user_id', '=',  Auth::id())
-                ->paginate(10);
+                ->paginate(8);
         }else {
-            $courses = Course::orderByDesc('created_at')->paginate(10);
+            $courses = Course::orderByDesc('created_at')->paginate(8);
         }
 
         // Carregar a view

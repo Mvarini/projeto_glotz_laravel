@@ -20,9 +20,10 @@
             </ol>
         </div>
 
-        <div class="card mb-4 shadow">
+{{--        <div class="card mb-4 shadow">--}}
+        <div class="mb-4">
             <div class="card-header d-flex justify-content-between">
-                <div class="d-flex justify-content-start">
+                <div class="d-flex justify-content-start mb-4">
                     <span>{{ $classe->name }}</span>
                 </div>
                 <div class="d-flex">
@@ -84,7 +85,7 @@
             <div class="card-body text-center">
 
                 <div class="col-12 pl-0 pr-0">
-                    <div class="row mb-2">
+                    <div class="row mb-4">
                         <div class="container text-center d-flex justify-content-center">
                             {{--                            <span><a class="btn btn-outline-primary btn-sm" href="#" >&larr; Anterior</a></span>--}}
 
@@ -98,8 +99,8 @@
                 </div>
 
                 @if($classe->video)
-                    <video src="/storage/{{ $classe->video }}" class="img-fluid" width="1100" height="500" controls
-                           style="width: 1100px; height: 500px">
+                    <video src="/storage/{{ $classe->video }}" class="img-fluid mb-2" width="1200" height="500" controls
+                           style="width: 1200px; height: 500px">
                         <source src="/storage/{{ $classe->video }}" type="video/mp4">
                         <source src="/storage/{{ $classe->video }}" type="video/mov">
                     </video>

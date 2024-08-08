@@ -8,20 +8,10 @@
             </ol>
         </div>
 
-{{--        <div class="row mb-3">--}}
-{{--            <form action="{{ route('course.index') }}" METHOD="GET">--}}
-{{--                <div class="input-group">--}}
-{{--                    <input type="text" class="form-control" name="pesquisar" value=""--}}
-{{--                           placeholder="Pesquisar professor por nome ou sobrenome">--}}
-{{--                    <button type="submit" class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></button>--}}
-{{--                    <a href="{{ route('course.index') }}" class="input-group-text"><i class="fa-solid fa-eraser"></i></a>--}}
-{{--                </div>--}}
-{{--            </form>--}}
-{{--        </div>--}}
-
-        <div class="card shadow">
+{{--        <div class="card shadow">--}}
+        <div>
             <div class="card-header d-flex justify-content-between">
-                <div class="d-flex justify-content-start">
+                <div class="d-flex justify-content-start mb-4">
                     <span>Meus cursos</span>
                 </div>
                 <div>

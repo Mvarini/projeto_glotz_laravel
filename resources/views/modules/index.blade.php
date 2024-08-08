@@ -26,13 +26,16 @@
         <x-alert/>
 
         @forelse($datas as $data)
-            <div class="list-group-item">
-                <div class="card mb-3">
-                    <div class="card-header d-flex justify-content-between">
-                        <div class="d-flex justify-content-start">
-                            <span>{{ $data->name }}</span>
-                        </div>
-                        <div>
+            <div class="accordion accordion-flush mt-2" id="accordionFlushExample">
+                <div class="accordion-item">
+                    <div class="accordion-header position-relative">
+                        <button class="accordion-button collapsed shadow rounded" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#{{ $data->id }}" aria-expanded="false"
+                                aria-controls="flush-collapseOne">
+                            {{ $data->name }}
+                        </button>
+
+                        <div class="z-3 position-absolute top-0 end-0 pe-3">
                             @can('index-classe')
                                 <a href="{{ route('classe.index', ['module' => $data->id]) }}"
                                    class="btn btn-outline-secondary btn-sm me-2 border-0" title="Aulas">
@@ -47,13 +50,6 @@
                                 </a>
                             @endcan
 
-                            {{--                            @can('create-module')--}}
-                            {{--                                <a href="{{ route('module.create', ['course' => $data->course->id]) }}"--}}
-                            {{--                                   class="btn btn-outline-primary btn-sm border-0 me-2" title="Cadastrar">--}}
-                            {{--                                    <i class="fa-solid fa-plus"></i>--}}
-                            {{--                                </a>--}}
-                            {{--                            @endcan--}}
-
                             @can('edit-module')
                                 <a href="{{ route('module.edit', ['module' => $data->id]) }}"
                                    class="btn btn-outline-primary btn-sm border-0 me-2" title="Editar">
@@ -67,14 +63,17 @@
                                       method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-outline-danger btn-sm border-0 btnDelete"
-                                            data-delete-id="{{$data->id}}"><i class="fa-solid fa-trash-can"></i>
-                                    </button>
+                                    <a type="submit" class="btn btn-outline-danger btn-sm border-0 btnDelete"
+                                       data-delete-id="{{$data->id}}"><i class="fa-solid fa-trash-can"></i>
+                                    </a>
                                 </form>
                             @endcan
-
                         </div>
                     </div>
+                </div>
+            </div>
+            <div id="{{ $data->id }}" class="accordion-collapse collapse">
+                <div class="accordion-body border">
                     <div class="card-body">
                         <table class="table table-hover">
                             <thead>
@@ -135,8 +134,7 @@
                     </div>
                 </div>
             </div>
-        @endforelse
-    </div>
+    @endforelse
 
 @endsection
 

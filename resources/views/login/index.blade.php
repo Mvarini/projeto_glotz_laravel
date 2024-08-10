@@ -4,11 +4,8 @@
     <div class="wrapper">
         <div class="section-authentication-signin d-flex align-items-center justify-content-center my-5 my-lg-0">
             <div class="container-fluid">
-                <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-3">
+                <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-3 align-items-center justify-content-center vh-100">
                     <div class="col mx-auto">
-                        <div class="mb-5 mt-4 text-center">
-                            <img src="" alt=""/>
-                        </div>
                         <div class="card border-0">
                             <div class="card-body">
                                 <div class="border shadow p-4 rounded">
@@ -78,9 +75,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="text-center mt-5">
-                    <a href="#" onClick="window.open('https://www.sitelock.com/verify.php?site=marcielvarini.com','SiteLock','width=600,height=600,left=160,top=170');"><img className="img-fluid" alt="SiteLock" title="SiteLock" src="https://shield.sitelock.com/shield/marcielvarini.com" /></a>
-                </div>
+{{--                <div class="text-center mt-5">--}}
+{{--                    <a href="#" onClick="window.open('https://www.sitelock.com/verify.php?site=marcielvarini.com','SiteLock','width=600,height=600,left=160,top=170');"><img className="img-fluid" alt="SiteLock" title="SiteLock" src="https://shield.sitelock.com/shield/marcielvarini.com" /></a>--}}
+{{--                </div>--}}
                 <!--end row-->
             </div>
         </div>

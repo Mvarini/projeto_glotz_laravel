@@ -21,11 +21,11 @@ class DashboardController extends Controller
 
         // Cards Papéis
         $superAdminCount = User::with('roles')->get()->filter(
-            fn ($user) => $user->roles->where('name', 'Super Admin')->toArray()
+            fn($user) => $user->roles->where('name', 'Super Admin')->toArray()
         )->count();
 
         $adminCount = User::with('roles')->get()->filter(
-            fn ($user) => $user->roles->where('name', 'Admin')->toArray()
+            fn($user) => $user->roles->where('name', 'Admin')->toArray()
         )->count();
 
 //        $teacherCount = User::with('roles')->get()->filter(
@@ -45,6 +45,12 @@ class DashboardController extends Controller
             ->orderBy('ano', 'asc')
             ->get();
 
+        // Definindo variáveis
+        $year = array();
+        $total = array();
+        $courseTotal = array();
+        $courseName = array();
+
         // Preparar os dados Gráfico 01
         foreach ($studentData as $student) {
             $year[] = $student->ano;
@@ -61,7 +67,7 @@ class DashboardController extends Controller
 
         // Prepar os dados Gráfico 02
         foreach ($courseData as $course) {
-            $courseName[] = "'".$course->name."'";
+            $courseName[] = "'" . $course->name . "'";
             $courseTotal[] = $course->student->count();
         }
 
@@ -74,7 +80,6 @@ class DashboardController extends Controller
             'menu' => 'dashboard',
             'course' => $Course,
             'teacher' => $teacher,
-            'student' => $student,
             'superAdminCount' => $superAdminCount,
             'adminCount' => $adminCount,
             'studentLabel' => $studentLabel,

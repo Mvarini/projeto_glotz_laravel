@@ -160,7 +160,7 @@ class UserController extends Controller
             Log::error('Usuário não excluído', ['id' => $user->id, 'action_user_id' => Auth::id()]);
 
             // Redireciona o usuário, envia mensagem de sucesso
-            return redirect()->route('user.index')->with('error', 'Usuário não excluído!');
+            return redirect()->route('user.index')->with('error', 'Usuário não excluído. Existe curso(s) atribuido ao aluno');
         }
     }
 

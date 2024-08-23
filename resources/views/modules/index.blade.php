@@ -29,7 +29,7 @@
             <div class="accordion accordion-flush mt-2" id="accordionFlushExample">
                 <div class="accordion-item">
                     <div class="accordion-header position-relative">
-                        <button class="accordion-button collapsed shadow rounded" type="button"
+                        <button class="accordion-button collapsed shadow-sm rounded border" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#{{ $data->id }}" aria-expanded="false"
                                 aria-controls="flush-collapseOne">
                             {{ $data->name }}

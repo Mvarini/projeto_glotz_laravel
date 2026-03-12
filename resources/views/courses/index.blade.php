@@ -55,7 +55,9 @@
                                        class="text-decoration-none"><h6
                                             class="card-title text-primary">{{ substr($course->name, 0, 27) }}</h6>
                                     </a>
+                                    @if(!auth()->user()->hasRole('Convidado'))
                                     <hr>
+                                    @endif
                                     <div class="d-flex align-items-center gap-2">
                                         @can('show-course')
                                             <a href="{{ route('course.show', ['course' => $course->id]) }}"
@@ -94,7 +96,7 @@
                                             </form>
                                         @endcan
                                     </div>
-                                    @if(!auth()->user()->hasRole('Aluno'))
+                                    @if(!auth()->user()->hasRole('Aluno') || !auth()->user()->hasRole('Convidado'))
                                         <hr>
                                     @endif
                                     <div>

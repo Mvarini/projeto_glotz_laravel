@@ -34,7 +34,7 @@ class PermissionSeeder extends Seeder
             ['title' => 'Assitir a aula', 'name' => 'view-classe'],
             ['title' => 'Baixar pdf da aula', 'name' => 'file-classe'],
 
-            ['title' => 'Listar dashboards', 'name' => 'dashboard'],
+            ['title' => 'Listar dashboards', 'name' => 'index-dashboard'],
 
             ['title' => 'Listar professores', 'name' => 'index-teacher'],
             ['title' => 'Visualizar professor', 'name' => 'show-teacher'],

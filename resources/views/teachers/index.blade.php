@@ -15,7 +15,8 @@
                     <input type="text" class="form-control" name="pesquisar" value="{{ $pesquisar }}"
                            placeholder="Pesquisar professor por nome ou sobrenome">
                     <button type="submit" class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></button>
-                    <a href="{{ route('teacher.index') }}" class="input-group-text"><i class="fa-solid fa-eraser"></i></a>
+                    <a href="{{ route('teacher.index') }}" class="input-group-text"><i
+                            class="fa-solid fa-eraser"></i></a>
                 </div>
             </form>
         </div>
@@ -50,22 +51,32 @@
                             <td>{{ $teacher->first_name }}</td>
                             <td>{{ $teacher->last_name }}</td>
                             <td class="d-md-flex justify-content-center">
-                                <a href="{{ route('teacher.show', ['teacher' => $teacher->id]) }}"
-                                   class="btn btn-outline-info btn-sm me-2 border-0"><i class="fa-solid fa-eye"></i>
-                                </a>
+                                @can('show-teacher')
+                                    <a href="{{ route('teacher.show', ['teacher' => $teacher->id]) }}"
+                                       class="btn btn-outline-info btn-sm me-2 border-0"><i class="fa-solid fa-eye"></i>
+                                    </a>
+                                @endcan
 
-                                <a href="{{ route('teacher.edit', ['teacher' => $teacher->id]) }}"
-                                   class="btn btn-outline-primary btn-sm me-2 border-0"><i
-                                        class="fa-solid fa-pen-to-square"></i>
-                                </a>
+                                @can('edit-teacher')
+                                    <a href="{{ route('teacher.edit', ['teacher' => $teacher->id]) }}"
+                                       class="btn btn-outline-primary btn-sm me-2 border-0"><i
+                                            class="fa-solid fa-pen-to-square"></i>
+                                    </a>
+                                @endcan
 
-                                <form id="formDelete{{ $teacher->id }}" action="{{ route('teacher.destroy', ['teacher' => $teacher->id])}}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-outline-danger btn-sm border-0 btnDelete" data-delete-id="{{ $teacher->id }}">
-                                        <i class="fa-solid fa-trash-can"></i>
-                                    </button>
-                                </form>
+                                @can('destroy-teacher')
+                                    <form id="formDelete{{ $teacher->id }}"
+                                          action="{{ route('teacher.destroy', ['teacher' => $teacher->id])}}"
+                                          method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-outline-danger btn-sm border-0 btnDelete"
+                                                data-delete-id="{{ $teacher->id }}">
+                                            <i class="fa-solid fa-trash-can"></i>
+                                        </button>
+                                    </form>
+                                @endcan
+
                             </td>
                         </tr>
                     @empty
@@ -75,7 +86,7 @@
                     @endforelse
                     </tbody>
                 </table>
-                    {{ $teachers->onEachSide(0)->links() }}
+                {{ $teachers->onEachSide(0)->links() }}
             </div>
         </div>
     </div>

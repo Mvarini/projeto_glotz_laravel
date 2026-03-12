@@ -47,7 +47,7 @@ class RoleSeeder extends Seeder
             'view-classe',
             'file-classe',
 
-            'dashboard',
+            'index-dashboard',
 
             'index-teacher',
             'show-teacher',

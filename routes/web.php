@@ -24,11 +24,11 @@ Route::get('/logout', [\App\Http\Controllers\LoginController::class, 'destroy'])
 Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard.index')->middleware('permission:index-dashboard');
 
 // PROFILE
-Route::get('/show-profile', [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
-Route::get('/edit-profile', [\App\Http\Controllers\ProfileController::class, 'edit'])->name('profile.edit');
-Route::put('/update-profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
-Route::get('/edit-profile-password', [\App\Http\Controllers\ProfileController::class, 'editPassword'])->name('profile.edit-Password');
-Route::put('/update-profile-password', [\App\Http\Controllers\ProfileController::class, 'updatePassword'])->name('profile.update-Password');
+Route::get('/show-profile', [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show')->middleware('permission:show-profile');
+Route::get('/edit-profile', [\App\Http\Controllers\ProfileController::class, 'edit'])->name('profile.edit')->middleware('permission:edit-profile');
+Route::put('/update-profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update')->middleware('permission:update-profile');
+Route::get('/edit-profile-password', [\App\Http\Controllers\ProfileController::class, 'editPassword'])->name('profile.edit-Password')->middleware('permission:edit-profile-password');
+Route::put('/update-profile-password', [\App\Http\Controllers\ProfileController::class, 'updatePassword'])->name('profile.update-Password')->middleware('permission:update-profile-password');
 
 
 // STUDENT
@@ -109,7 +109,7 @@ Route::put('/update-user-password/{user}', [\App\Http\Controllers\UserController
     Route::post('/store-permission', [\App\Http\Controllers\PermissionController::class, 'store'])->name('permission.store')->middleware('permission:create-permission');
     Route::get('/edit-permission/{permission}', [\App\Http\Controllers\PermissionController::class, 'edit'])->name('permission.edit')->middleware('permission:edit-permission');
     Route::put('/update-permission/{permission}', [\App\Http\Controllers\PermissionController::class, 'update'])->name('permission.update')->middleware('permission:edit-permission');
-    Route::delete('/destroy-permission/{permission}', [\App\Http\Controllers\PermissionController::class, 'destroy'])->name('permission.destroy')->middleware('permission:edit-permission');
+    Route::delete('/destroy-permission/{permission}', [\App\Http\Controllers\PermissionController::class, 'destroy'])->name('permission.destroy')->middleware('permission:destroy-permission');
 
     // CERTIFICATE
     Route::get('/generate-pdf-user/{student}/{course}', [\App\Http\Controllers\CertificateController::class, 'certificate'])->name('certificate.user')->middleware('permission:generate-pdf-user');

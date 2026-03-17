@@ -34,7 +34,7 @@
     <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">{{--<i class="fas fa-user fa-fw"></i>--}}
+               aria-expanded="false">{{--<i class="fas fa-user fa-fw"></i>--}}
                 @if(auth()->check())
                     @php
                         $partes = explode(' ', auth()->user()->name);
@@ -44,7 +44,9 @@
                 @endif
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="{{ route('profile.show') }}">Perfil</a></li>
+                @can('show-profile')
+                    <li><a class="dropdown-item" href="{{ route('profile.show') }}">Perfil</a></li>
+                @endcan
                 <li><a class="dropdown-item" href="{{ route('login.destroy') }}">Sair</a></li>
             </ul>
         </li>
@@ -94,20 +96,21 @@
                         </a>
                     @endcan
 
-                        @can('index-role')
-                            <a @class(['nav-link', 'active' => isset($menu) && $menu == 'roles']) class="nav-link"
-                               href="{{ route('role.index') }}">
-                                <div class="sb-nav-link-icon"><i class="fa-solid fa-network-wired"></i></div>
-                                Papel
-                            </a>
-                        @endcan
+                    @can('index-role')
+                        <a @class(['nav-link', 'active' => isset($menu) && $menu == 'roles']) class="nav-link"
+                           href="{{ route('role.index') }}">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-network-wired"></i></div>
+                            Papel
+                        </a>
+                    @endcan
 
-                        @can('index-permission')
-                            <a @class(['nav-link', 'active' => isset($menu) && $menu == 'permissions']) class="nav-link" href="{{ route('permission.index') }}">
-                                <div class="sb-nav-link-icon"><i class="fa-solid fa-shield-halved"></i></div>
-                                Permissão
-                            </a>
-                        @endcan
+                    @can('index-permission')
+                        <a @class(['nav-link', 'active' => isset($menu) && $menu == 'permissions']) class="nav-link"
+                           href="{{ route('permission.index') }}">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                            Permissão
+                        </a>
+                    @endcan
                 </div>
             </div>
         </nav>
@@ -139,7 +142,6 @@
 <script src="{{ asset('js/chart.js') }}"></script>
 <script src="{{ asset('js/main.js') }}"></script>
 @stack('graficos')
-
 
 
 </body>

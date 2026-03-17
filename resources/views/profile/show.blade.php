@@ -16,8 +16,12 @@
                     <span>Visualizar</span>
                 </div>
                 <div class="d-flex">
+                    @can('edit-profile-password')
                     <a href="{{ route('profile.edit-Password') }}" class="btn btn-dark btn-sm me-2">Senha</a>
+                    @endcan
+                    @can('edit-profile')
                     <a href="{{ route('profile.edit') }}" class="btn btn-primary btn-sm me-2">Editar</a>
+                    @endcan
                 </div>
             </div>
             <div class="card-body">

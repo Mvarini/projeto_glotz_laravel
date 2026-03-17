@@ -16,14 +16,18 @@
                     <span>Visualizar</span>
                 </div>
                 <div class="d-flex">
-                    <a href="{{ route('teacher.edit', ['teacher' => $teacher->id]) }}"
-                       class="btn btn-primary btn-sm me-2">Editar</a>
-                    <form id="formDelete{{ $teacher->id }}" action="{{ route('teacher.destroy', ['teacher' => $teacher->id])}}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm btnDelete" data-delete-id="{{ $teacher->id }}">Excluir
-                        </button>
-                    </form>
+                    @can('edit-teacher')
+                        <a href="{{ route('teacher.edit', ['teacher' => $teacher->id]) }}"
+                           class="btn btn-primary btn-sm me-2">Editar</a>
+                    @endcan
+                    @can('destroy-teacher')
+                            <form id="formDelete{{ $teacher->id }}" action="{{ route('teacher.destroy', ['teacher' => $teacher->id])}}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm btnDelete" data-delete-id="{{ $teacher->id }}">Excluir
+                                </button>
+                            </form>
+                    @endcan
                 </div>
             </div>
             <div class="card-body">
